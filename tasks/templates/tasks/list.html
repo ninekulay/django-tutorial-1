@@ -1,0 +1,19 @@
+<h3>Todo list</h3>
+<form method="POST" action="/">
+    {% csrf_token %}
+   {{form.title}}
+   <input type="submit" name="create task"> 
+</form>
+{% for task in tasks %}
+<div>
+    <a href="{% url 'update_task' task.id %}">Update</a>
+    <a href="{% url 'delete_task' task.id %}">Delete</a>
+    
+    {% if task.complete == True %}
+    <strike>{{task}}</strike>
+    {% else %}
+    <span>{{task.title}}</span>
+    <span>Create : {{task.created_date}}</span>
+    {% endif %}
+</div>
+{% endfor %}
